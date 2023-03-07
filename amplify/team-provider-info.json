@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify7f5280e13cee4-staging-130821-authRole",
+      "UnauthRoleArn": "arn:aws:iam::535694013534:role/amplify-amplify7f5280e13cee4-staging-130821-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::535694013534:role/amplify-amplify7f5280e13cee4-staging-130821-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-amplify7f5280e13cee4-staging-130821-deployment",
+      "UnauthRoleName": "amplify-amplify7f5280e13cee4-staging-130821-unauthRole",
+      "StackName": "amplify-amplify7f5280e13cee4-staging-130821",
+      "StackId": "arn:aws:cloudformation:us-east-1:535694013534:stack/amplify-amplify7f5280e13cee4-staging-130821/231d7b90-bce9-11ed-8daf-0aeac541f50b",
+      "AmplifyAppId": "d3srfd08mf78yx"
+    },
+    "categories": {
+      "auth": {
+        "revelerwebapp987d27da": {}
+      }
+    }
+  }
+}
