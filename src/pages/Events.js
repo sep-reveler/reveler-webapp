@@ -1,12 +1,13 @@
-import { Suspense } from 'react';
+import { Suspense, useState, useEffect } from "react";
 import { useLoaderData, json, defer, Await } from 'react-router-dom';
 import { listGames } from "../graphql/queries";
-import { API } from "aws-amplify";
+import { API, graphqlOperation } from "aws-amplify";
 
 
 import EventsList from '../components/EventsList';
 
 function EventsPage() {
+  const [loadedGames, setLoadedGames] = useState([]);
 /*   const res = useLoaderData();
   console.log('useLoaderData output:');
   console.log(res); */
@@ -52,38 +53,35 @@ useEffect(() => {
 }, []); */
 
 async function loadGames() {
-  console.log('In loadGames():');
+/*   console.log('In loadGames():');
   const apiData = await API.graphql({ query: listGames });
   const notesFromAPI = apiData.data.listGames.items;
   //setGames(notesFromAPI);
   console.log('loadGames():');
   console.log(notesFromAPI);
-  return notesFromAPI;
+  return notesFromAPI; */
+  var today = new Date(2023, 1, 2);
+  var todayString = today.toISOString().slice(0, 10);
+  console.log(todayString);
+  const games = await API.graphql(
+    graphqlOperation(listGames, {
+      filter: {
+        plannedKickoffTime: {
+          beginsWith: "2023-03-16", //todayString 02-08
+        },
+        /*           stageId: {
+            eq: "sr:season:93741:1",
+          }, */
+      },
+    })
+  );
+  console.log("GAMES ARE: ", games.data.listGames.items);
+  return games.data.listGames.items;
+/*   if (games.data.listGames.items.length > 0) {
+    this.setState({ games: games.data.listGames.items });
+  } */
 }
 
-/* async function createGame(event) {
-  event.preventDefault();
-  const form = new FormData(event.target);
-  const data = {
-    name: form.get("name"),
-    description: form.get("desc"),
-  };
-  await API.graphql({
-    query: createGameMutation,
-    variables: { input: data },
-  });
-  fetchGames();
-  event.target.reset();
-}
-
-async function deleteGame({ id }) {
-  const newNotes = games.filter((note) => note.id !== id);
-  setGames(newNotes);
-  await API.graphql({
-    query: deleteGameMutation,
-    variables: { input: { id } },
-  });
-} */
 
 export function loader() {
   console.log('In defer( games: loadedGames() ) pre-loadGames() exec');
