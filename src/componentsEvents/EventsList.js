@@ -13,7 +13,12 @@ function EventsList({events}) {
         {events.map((event) => (
           <li key={event.id} className={classes.item}>
             <Link to={`/events/${event.id}`}>
-              <img src={event.gameImg} alt={event.name} />
+              <img
+                src={
+                  "https://resources.premierleague.com/photos/premierleague/photo/2022/02/15/99008ef3-508b-4465-8c91-a2a6a43222ce/1370772003.jpg?width=500&height=333"
+                }
+                alt={event.name}
+              />
               <div className={classes.content}>
                 <h2>{event.name}</h2>
                 <time>{event.plannedKickoffTime}</time>
